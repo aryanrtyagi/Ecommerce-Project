@@ -3,7 +3,7 @@ import { authFetch } from "../utils/auth";
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-    const BASEURL =  'http://127.0.0.1:8000';
+    const BASEURL = import.meta.env.VITE_DJANGO_BASE_URL;
 
     const [cartItems, setCartItems] = useState([]);
     const [total, setTotal] = useState(0);
