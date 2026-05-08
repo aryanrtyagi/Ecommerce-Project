@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
+    'cloudinary',
     'store',
     'rest_framework',
     'rest_framework_simplejwt',
@@ -155,3 +157,11 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': True,
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'your_cloud_name',
+    'API_KEY': 'your_api_key',
+    'API_SECRET': 'your_api_secret',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
