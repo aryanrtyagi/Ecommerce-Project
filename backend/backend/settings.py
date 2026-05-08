@@ -162,12 +162,6 @@ SIMPLE_JWT = {
 }
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'your_cloud_name',
-    'API_KEY': 'your_api_key',
-    'API_SECRET': 'your_api_secret',
-}
-
-CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'dwqlvb0pa',
     'API_KEY':'832947461136991',
     'API_SECRET':'O9hM-4UBjF8ld9dx9YeDHFu3n90',
