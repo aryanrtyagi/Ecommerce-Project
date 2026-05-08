@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 
 function ProductList() {
+  const BASE = import.meta.env.VITE_DJANGO_BASE_URL;
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/products/")
+    fetch(`${BASE}/api/products/`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch products");

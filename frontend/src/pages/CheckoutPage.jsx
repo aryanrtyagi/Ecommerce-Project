@@ -4,7 +4,7 @@ import { useCart } from "../context/CartContext"
 import { authFetch } from "../utils/auth";
 
 function CheckoutPage() {
-    const BASEURL = 'http://127.0.0.1:8000';
+    const BASEURL = import.meta.env.VITE_DJANGO_BASE_URL;
     const navigate = useNavigate();
     const { fetchCart,clearCart } = useCart();
 

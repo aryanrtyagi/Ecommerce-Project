@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useCart } from '../context/CartContext';
 
 function ProductDetails({ products }) {
-    const BASEURL = 'http://127.0.0.1:8000';
+    const BASEURL = import.meta.env.VITE_DJANGO_BASE_URL;
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);

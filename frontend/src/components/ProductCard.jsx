@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 
 function ProductCard({ product }) {
-  const BASEURL = "http://127.0.0.1:8000"
+  const BASEURL = import.meta.env.VITE_DJANGO_BASE_URL;
   const { addToCart } = useCart();
   const navigate = useNavigate();
 
