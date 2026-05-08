@@ -130,6 +130,9 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
@@ -164,4 +167,11 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': 'your_api_secret',
 }
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dwqlvb0pa',
+    'API_KEY':'832947461136991',
+    'API_SECRET':'O9hM-4UBjF8ld9dx9YeDHFu3n90',
+}
+
+
+
