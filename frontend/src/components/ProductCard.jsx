@@ -13,7 +13,7 @@ function ProductCard({ product }) {
     >
       {/* Product Image */}
       <img
-        src={`${BASEURL}${product.image}`}
+        src={product.image}
         alt={product.name}
         className="w-full h-48 object-cover rounded-xl mb-4"
       />
