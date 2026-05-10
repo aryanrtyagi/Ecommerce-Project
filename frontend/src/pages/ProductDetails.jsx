@@ -43,7 +43,6 @@ function ProductDetails({ products }) {
         return <div>No Product Found!!!</div>;
     }
 
-    // Add to Cart functionality
     const handleAddToCart = () => {
         if (!localStorage.getItem('access_token')) {
             window.location.href = '/login';
@@ -51,17 +50,6 @@ function ProductDetails({ products }) {
         }
 
         addToCart(product.id);
-    }
-
-    // Buy Now functionality
-    const handleBuyNow = async () => {
-        if (!localStorage.getItem('access_token')) {
-            window.location.href = '/login';
-            return;
-        }
-
-        await addToCart(product.id);
-        navigate('/cart');
     }
 
     return (
@@ -106,14 +94,6 @@ function ProductDetails({ products }) {
                                 className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 transition"
                             >
                                 Add to Cart
-                            </button>
-
-                            {/* Buy Now */}
-                            <button
-                                onClick={handleBuyNow}
-                                className="border border-gray-300 px-4 py-2 rounded-lg text-sm hover:bg-gray-100 transition"
-                            >
-                                Buy Now
                             </button>
                         </div>
 
