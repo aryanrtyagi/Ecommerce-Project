@@ -10,19 +10,26 @@ import Signup from './pages/Signup';
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<ProductList />} />
-        <Route path="/product/:id" element={<ProductDetails />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route elememt={<PrivateRouter />}>
-          <Route path='/CheckOut' element={<CheckoutPage />} />
-        </Route>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/signup" element={<Signup/>}/>
-      </Routes>
-    </Router>
+    <>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<ProductList />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route elememt={<PrivateRouter />}>
+            <Route path='/CheckOut' element={<CheckoutPage />} />
+          </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
+      </Router>
+      <footer className="bg-gray-900 text-white text-center py-4 mt-10">
+        <p className="text-sm">
+          © 2026 Aryan Tyagi. All Rights Reserved.
+        </p>
+      </footer>
+    </>
   )
 }
 
