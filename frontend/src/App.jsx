@@ -24,10 +24,10 @@ function App() {
           <Route path="/signup" element={<Signup />} />
         </Routes>
       </Router>
-      <footer className="bg-gray-900 text-white text-center py-4 mt-10">
-        <p className="text-sm">
-          © 2026 Aryan Tyagi. All Rights Reserved.
-        </p>
+      <footer className="bg-gray-900 text-white text-center py-4">
+          <p className="text-sm">
+            © 2026 Aryan Tyagi. All Rights Reserved.
+          </p>
       </footer>
     </>
   )
