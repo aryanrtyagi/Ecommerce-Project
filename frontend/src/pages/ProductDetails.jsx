@@ -47,6 +47,7 @@ function ProductDetails({ products }) {
         }
         addToCart(product.id);
     }
+    
     return (
         <div className="min-h-screen bg-gray-100 p-6 flex items-center justify-center">
             <div className="bg-white rounded-2xl shadow-lg max-w-5xl w-full grid md:grid-cols-2 gap-8 p-6">
