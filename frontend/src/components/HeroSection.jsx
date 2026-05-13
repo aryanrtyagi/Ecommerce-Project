@@ -32,7 +32,7 @@ function HeroSection() {
                     {/* Heading */}
                     <h1 className="text-5xl md:text-7xl font-black leading-tight tracking-tight mb-8">
                         Elevate Your
-                        <span className="block text-transparent bg-clip-text bg-gradient from-white via-gray-300 to-gray-500">
+                        <span className="block text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.25)]">
                             Digital Shopping
                         </span>
                         Experience
