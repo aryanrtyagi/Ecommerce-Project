@@ -8,9 +8,9 @@ function HeroSection() {
             <div className="absolute inset-0">
                 <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.08),transparent_35%)]"></div>
 
-                <div className="absolute top-[-150px] right-[-100px] w-[500px] h-[500px] bg-white/5 blur-3xl rounded-full"></div>
+                <div className="absolute top-150px right-100px w-500px h-500px bg-white/5 blur-3xl rounded-full"></div>
 
-                <div className="absolute bottom-[-150px] left-[-100px] w-[400px] h-[400px] bg-purple-500/10 blur-3xl rounded-full"></div>
+                <div className="absolute bottom-150px left-100px w-400px h-400px bg-purple-500/10 blur-3xl rounded-full"></div>
 
                 {/* Grid Pattern */}
                 <div className="absolute inset-0 opacity-10 bg-[linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:60px_60px]"></div>
@@ -32,7 +32,7 @@ function HeroSection() {
                     {/* Heading */}
                     <h1 className="text-5xl md:text-7xl font-black leading-tight tracking-tight mb-8">
                         Elevate Your
-                        <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-gray-500">
+                        <span className="block text-transparent bg-clip-text bg-gradient from-white via-gray-300 to-gray-500">
                             Digital Shopping
                         </span>
                         Experience
@@ -59,7 +59,7 @@ function HeroSection() {
                                 </span>
                             </span>
 
-                            <div className="absolute inset-0 bg-gradient-to-r from-gray-200 to-white opacity-0 group-hover:opacity-100 transition"></div>
+                            <div className="absolute inset-0 bg-gradient from-gray-200 to-white opacity-0 group-hover:opacity-100 transition"></div>
                         </Link>
 
                         <Link
@@ -100,9 +100,9 @@ function HeroSection() {
                 <div className="relative flex justify-center">
 
                     {/* Glow Ring */}
-                    <div className="absolute w-[450px] h-[450px] border border-white/10 rounded-full"></div>
+                    <div className="absolute w-450px h-450px border border-white/10 rounded-full"></div>
 
-                    <div className="absolute w-[550px] h-[550px] border border-white/5 rounded-full"></div>
+                    <div className="absolute w-550px h-550px border border-white/5 rounded-full"></div>
 
                     {/* Main Image */}
                     <div className="relative group">
@@ -110,7 +110,7 @@ function HeroSection() {
                         <img
                             src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop"
                             alt="Luxury Product"
-                            className="w-[340px] md:w-[500px] object-cover rounded-[2.5rem] border border-white/10 shadow-[0_20px_100px_rgba(255,255,255,0.08)] group-hover:scale-105 transition duration-700"
+                            className="w-340px md:w-500px object-cover rounded-[2.5rem] border border-white/10 shadow-[0_20px_100px_rgba(255,255,255,0.08)] group-hover:scale-105 transition duration-700"
                         />
 
                         {/* Floating Card */}
