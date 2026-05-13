@@ -7,6 +7,7 @@ import CheckoutPage from './pages/CheckoutPage';
 import PrivateRouter from './components/PrivateRouter';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import CategoryProducts from "./pages/CategoryProducts";
 
 function App() {
   return (
@@ -22,12 +23,16 @@ function App() {
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/category/:id"
+            element={<CategoryProducts />}
+          />
         </Routes>
       </Router>
       <footer className="bg-gray-900 text-white text-center py-4">
-          <p className="text-sm">
-            © 2026 Aryan Tyagi. All Rights Reserved.
-          </p>
+        <p className="text-sm">
+          © 2026 Aryan Tyagi. All Rights Reserved.
+        </p>
       </footer>
     </>
   )
