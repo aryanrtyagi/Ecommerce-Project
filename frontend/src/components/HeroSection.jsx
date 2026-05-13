@@ -30,9 +30,9 @@ function HeroSection() {
                     </div>
 
                     {/* Heading */}
-                    <h1 className="text-5xl md:text-7xl font-black leading-tight tracking-tight mb-8">
+                    <h1 className="text-5xl md:text-7xl font-black leading-tight tracking-tight mb-8 text-white">
                         Elevate Your
-                        <span className="block text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.25)]">
+                        <span className="block text-white">
                             Digital Shopping
                         </span>
                         Experience
