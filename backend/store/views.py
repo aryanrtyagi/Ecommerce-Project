@@ -135,3 +135,15 @@ def register_view(request):
         return Response({"message": "User created successfully", "user":UserSerializer(user).data},status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET'])
+def get_products_by_category(request, category_id):
+
+    products = Product.objects.filter(category_id=category_id)
+
+    serializer = ProductSerializer(
+        products,
+        many=True,
+        context={'request': request}
+    )
+
+    return Response(serializer.data)
