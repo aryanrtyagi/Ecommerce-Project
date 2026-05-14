@@ -8,6 +8,7 @@ import PrivateRouter from './components/PrivateRouter';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import CategoryProducts from "./pages/CategoryProducts";
+import ProductsPage from './pages/ProductPage';
 
 function App() {
   return (
@@ -26,6 +27,10 @@ function App() {
           <Route
             path="/category/:id"
             element={<CategoryProducts />}
+          />
+          <Route
+            path="/products"
+            element={<ProductsPage />}
           />
         </Routes>
       </Router>
