@@ -2,15 +2,21 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view,permission_classes
 from rest_framework.permissions import IsAuthenticated,AllowAny
+from rest_framework.generics import ListAPIView
+from rest_framework import filters
 from .models import *
 from .serializers import *
 from django.contrib.auth.models import User
 
-@api_view(['GET'])
-def get_products(request):
-    products = Product.objects.all()
-    serializer = ProductSerializer(products,many=True)
-    return Response(serializer.data)
+class ProductListView(ListAPIView):
+
+    queryset = Product.objects.all()
+
+    serializer_class = ProductSerializer
+
+    filter_backends = [filters.SearchFilter]
+
+    search_fields = ['name', 'description']
 
 @api_view(['GET'])
 def get_product(request,pk):
