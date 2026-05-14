@@ -25,48 +25,48 @@ function ProductsPage() {
 
     useEffect(() => {
 
-    setLoading(true);
+        setLoading(true);
 
-    const url =
-        `${BASE}/api/products/?search=${query}`;
+        const url =
+            `${BASE}/api/products/?search=${query}`;
 
-    console.log(url);
+        console.log(url);
 
-    fetch(url)
+        fetch(url)
 
-        .then((response) => {
+            .then((response) => {
 
-            if (!response.ok) {
+                if (!response.ok) {
 
-                throw new Error(
-                    "Failed to fetch products"
-                );
-            }
+                    throw new Error(
+                        "Failed to fetch products"
+                    );
+                }
 
-            return response.json();
-        })
+                return response.json();
+            })
 
-        .then((data) => {
+            .then((data) => {
 
-            console.log(data);
+                console.log(data);
 
-            setProducts(data);
+                setProducts(data);
 
-            setLoading(false);
+                setLoading(false);
 
-        })
+            })
 
-        .catch((error) => {
+            .catch((error) => {
 
-            console.error(error);
+                console.error(error);
 
-            setError(error.message);
+                setError(error.message);
 
-            setLoading(false);
+                setLoading(false);
 
-        });
+            });
 
-}, [query]);
+    }, [query]);
 
     return (
 
@@ -81,12 +81,23 @@ function ProductsPage() {
 
                 {query && (
 
-                    <p className="text-gray-600 mt-3">
-                        Search results for:
-                        <span className="font-semibold">
-                            {" "}"{query}"
-                        </span>
-                    </p>
+                    <div className="flex items-center justify-center gap-4 mt-3">
+
+                        <p className="text-gray-600">
+                            Search results for:
+                            <span className="font-semibold">
+                                {" "}"{query}"
+                            </span>
+                        </p>
+
+                        <button
+                            onClick={() => window.location.href = "/"}
+                            className="bg-gray-200 px-3 py-1 rounded-lg hover:bg-gray-300 transition text-sm"
+                        >
+                            Clear Search
+                        </button>
+
+                    </div>
 
                 )}
 
