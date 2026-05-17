@@ -12,7 +12,7 @@ function HeroSection() {
         fetch(`${BASE}/api/products/`)
             .then((res) => res.json())
             .then((data) => {
-                const FEATURED_IDS = [1,2,3,9]
+                const FEATURED_IDS = [10,11,12]
                 setProducts(data.filter((p) => FEATURED_IDS.includes(p.id)));
             }) // first n products
             .catch((err) => console.error("Failed to fetch products:", err));
