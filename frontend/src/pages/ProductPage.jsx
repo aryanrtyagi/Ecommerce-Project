@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
+import ProductCardSkeleton from "../components/ProductCardSkeleton";
 
 function ProductsPage() {
     const BASE = import.meta.env.VITE_DJANGO_BASE_URL;
@@ -247,8 +248,10 @@ function ProductsPage() {
 
             {/* Products grid */}
             {loading ? (
-                <div className="text-center text-lg font-semibold">
-                    Loading products...
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    {Array.from({ length: 8 }).map((_, i) => (
+                        <ProductCardSkeleton key={i} />
+                    ))}
                 </div>
             ) : error ? (
                 <div className="text-center text-red-500 font-semibold">{error}</div>

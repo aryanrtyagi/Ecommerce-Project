@@ -1,5 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { authFetch } from "../utils/auth";
+import toast from "react-hot-toast";
+
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
@@ -52,8 +54,10 @@ export const CartProvider = ({ children }) => {
             });
             if(!res.ok) throw new Error("Failed to add to Cart");
             await fetchCart();
+            toast.success("Added to cart! 🛒")
         }catch(error){
             console.error("Error adding to cart:", error);
+            toast.error("Failed to add to cart!");
         }
     };
 
@@ -69,8 +73,10 @@ export const CartProvider = ({ children }) => {
             });
             if(!res.ok) throw new Error("Failed to remove from cart");
             await fetchCart();
+            toast.success("Item removed from cart");
         }catch(error){
             console.error("Error removing from Cart:",error);
+            toast.error("Failed to remove item");
         }
     }
 
@@ -91,8 +97,10 @@ export const CartProvider = ({ children }) => {
             });
             if(!res.ok) throw new Error("Failed to update successfully");
             await fetchCart();
+            toast.success("Cart Updated");
         }catch(error){
             console.error("Error updating quantity:", error);
+            toast.error("Failed to update quantity");
         }
     };
 

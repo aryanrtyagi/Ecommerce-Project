@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {Toaster} from "react-hot-toast";
 import ProductList from "./pages/ProductList";
 import ProductDetails from "./pages/ProductDetails";
 import Navbar from './components/Navbar';
@@ -13,6 +14,7 @@ import ProductsPage from './pages/ProductPage';
 function App() {
   return (
     <>
+      <Toaster position='top-center'/>
       <Router>
         <Navbar />
         <Routes>
