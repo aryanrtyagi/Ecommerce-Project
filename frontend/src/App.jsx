@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import CategoryProducts from "./pages/CategoryProducts";
 import ProductsPage from './pages/ProductPage';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -36,11 +37,7 @@ function App() {
           />
         </Routes>
       </Router>
-      <footer className="bg-gray-900 text-white text-center py-4">
-        <p className="text-sm">
-          © 2026 Aryan Tyagi. All Rights Reserved.
-        </p>
-      </footer>
+      <Footer/>
     </>
   )
 }
