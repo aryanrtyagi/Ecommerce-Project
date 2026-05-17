@@ -20,6 +20,7 @@ function Login() {
                 body: JSON.stringify(form),
             });
             const data = await res.json();
+            saveToken(data);
             if (res.ok) {
                 saveToken(data);
                 setMsg("Login Successful!");

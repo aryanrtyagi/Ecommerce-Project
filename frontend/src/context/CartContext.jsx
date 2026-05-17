@@ -13,9 +13,11 @@ export const CartProvider = ({ children }) => {
     const fetchCart = async () => {
         try{
             const res = await authFetch(`${BASEURL}/api/cart/`)
+
             if(!res.ok){
                 throw new Error("Failed to fetch cart");
             }
+            
             const data = await res.json();
             console.log("Cart data:", data)
             setCartItems(data.items || [])
@@ -29,7 +31,12 @@ export const CartProvider = ({ children }) => {
     }
 
     useEffect(()=>{
-        fetchCart();
+        const token = localStorage.getItem("access_token");
+
+        if(token){
+            fetchCart();
+        }
+
     }, []);
 
 
