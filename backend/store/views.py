@@ -10,13 +10,34 @@ from django.contrib.auth.models import User
 
 class ProductListView(ListAPIView):
 
-    queryset = Product.objects.all()
-
     serializer_class = ProductSerializer
 
     filter_backends = [filters.SearchFilter]
 
     search_fields = ['name', 'description']
+
+    def get_queryset(self):
+
+        queryset = Product.objects.all()
+
+        category = self.request.GET.get('category')
+        sort = self.request.GET.get('sort')
+
+        if category:
+            queryset = queryset.filter(
+                category__name__iexact=category
+            )
+
+        if sort == 'price_asc':
+            queryset = queryset.order_by('price')
+
+        elif sort == 'price_desc':
+            queryset = queryset.order_by('-price')
+
+        elif sort == 'newest':
+            queryset = queryset.order_by('-created_at')
+
+        return queryset
 
 @api_view(['GET'])
 def get_product(request,pk):
@@ -72,7 +93,7 @@ def update_cart_quantity(request):
         serializer = CartItemSerializer(item)
         return Response(serializer.data)
     except CartItem.DoesNotExist:
-        return Response({'error':'Cart item not found'},status = 200)
+        return Response({'error':'Cart item not found'},status = 404)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
