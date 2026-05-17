@@ -1,4 +1,16 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Toaster } from "react-hot-toast";
+import ProductList from "./pages/ProductList";
+import ProductDetails from "./pages/ProductDetails";
+import Navbar from './components/Navbar';
+import CartPage from "./pages/CartPage";
+import CheckoutPage from './pages/CheckoutPage';
+import PrivateRouter from './components/PrivateRouter';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import CategoryProducts from "./pages/CategoryProducts";
+import ProductsPage from './pages/ProductPage';
+import Footer from './components/Footer';
 
 function App() {
   return (
