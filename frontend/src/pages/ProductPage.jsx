@@ -186,7 +186,7 @@ function ProductsPage() {
                         <div className="mt-4 bg-white border border-gray-200 rounded-xl p-5 flex flex-wrap gap-6 shadow-sm">
                             {/* Category — only shown if products have categories */}
                             {categories.length > 0 && (
-                                <div className="flex flex-col gap-1.5 min-w-[160px]">
+                                <div className="flex flex-col gap-1.5 min-w-160px">
                                     <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
                                         Category
                                     </label>
