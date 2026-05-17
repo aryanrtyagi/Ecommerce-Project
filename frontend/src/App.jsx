@@ -36,8 +36,9 @@ function App() {
             element={<ProductsPage />}
           />
         </Routes>
+        <Footer/>
       </Router>
-      <Footer/>
+      
     </>
   )
 }
