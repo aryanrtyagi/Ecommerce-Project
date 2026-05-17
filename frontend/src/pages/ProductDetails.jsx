@@ -83,7 +83,7 @@ function ProductDetails() {
                         <img
                             src={product.image || "https://via.placeholder.com/400"}
                             alt={product.name}
-                            className="w-full h-[400px] object-cover rounded-xl"
+                            className="w-full h-400px object-cover rounded-xl"
                         />
                     </div>
 

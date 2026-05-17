@@ -39,7 +39,7 @@ function CartPage() {
                             <img
                                 src={item.product_image || "https://via.placeholder.com/100"}
                                 alt={item.product_name}
-                                className="w-24 h-24 object-cover rounded-xl flex-shrink-0"
+                                className="w-24 h-24 object-cover rounded-xl "
                             />
 
                             {/* Info */}
