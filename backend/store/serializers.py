@@ -55,3 +55,18 @@ class RegisterSerializer(serializers.ModelSerializer):
         password = validated_data.get('password')
         user = User.objects.create_user(username=username , email=email, password=password)
         return user
+    
+class OrderItemSerializer(serializers.ModelSerializer):
+    product_name = serializers.CharField(source='product.name')
+    product_image = serializers.ImageField(source='product.image')
+
+    class Meta:
+        model = OrderItem
+        fields = ['id', 'product_name', 'product_image', 'quantity', 'price']
+
+class OrderSerializer(serializers.ModelSerializer):
+    items = OrderItemSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Order
+        fields = ['id', 'name', 'address', 'phone', 'payment_method', 'total_amount', 'created_at', 'items']

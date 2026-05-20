@@ -174,3 +174,13 @@ def get_products_by_category(request, category_id):
     )
 
     return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_orders(request):
+    try:
+        orders = Order.objects.filter(user=request.user).order_by('-created_at')
+        serializers = OrderSerializer(orders, many=True)
+        return Response(serializers.data)
+    except Exception as e:
+        return Response({"error":str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
