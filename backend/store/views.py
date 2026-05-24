@@ -175,6 +175,7 @@ def get_products_by_category(request, category_id):
 
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_orders(request):
