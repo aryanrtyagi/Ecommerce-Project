@@ -61,4 +61,5 @@ urlpatterns = [
         views.create_order
     ),
     path('orders/', views.get_orders),
+    path('products/create/', views.create_product),
 ]

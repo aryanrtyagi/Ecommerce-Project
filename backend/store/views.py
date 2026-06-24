@@ -185,3 +185,40 @@ def get_orders(request):
         return Response(serializers.data)
     except Exception as e:
         return Response({"error":str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def create_product(request):
+    """
+    Seller GUI endpoint — create a new product.
+    Accepts multipart/form-data with: name, price, description, category (id), image (file).
+    """
+    try:
+        name = request.data.get('name', '').strip()
+        price = request.data.get('price')
+        description = request.data.get('description', '').strip()
+        category_id = request.data.get('category')
+        image = request.FILES.get('image')
+
+        if not all([name, price, description, category_id]):
+            return Response({'error': 'name, price, description and category are required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            category = Category.objects.get(id=category_id)
+        except Category.DoesNotExist:
+            return Response({'error': 'Category not found.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        product = Product.objects.create(
+            name=name,
+            price=price,
+            description=description,
+            category=category,
+            image=image,
+        )
+
+        serializer = ProductSerializer(product, context={'request': request})
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
