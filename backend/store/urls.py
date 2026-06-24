@@ -25,6 +25,7 @@ urlpatterns = [
         'products/',
         views.ProductListView.as_view()
     ),
+    path('products/create/', views.create_product),
     path(
         'products/<int:pk>/',
         views.get_product
@@ -61,5 +62,5 @@ urlpatterns = [
         views.create_order
     ),
     path('orders/', views.get_orders),
-    path('products/create/', views.create_product),
+    
 ]
