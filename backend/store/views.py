@@ -190,10 +190,6 @@ def get_orders(request):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def create_product(request):
-    """
-    Seller GUI endpoint — create a new product.
-    Accepts multipart/form-data with: name, price, description, category (id), image (file).
-    """
     try:
         name = request.data.get('name', '').strip()
         price = request.data.get('price')
@@ -222,3 +218,51 @@ def create_product(request):
 
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_wishlist(request):
+    items = Wishlist.objects.filter(user=request.user).order_by('-added_at')
+    serializer = WishlistSerializer(items, many=True, context={'request': request})
+    return Response(serializer.data)
+ 
+ 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def add_to_wishlist(request):
+    product_id = request.data.get('product_id')
+    try:
+        product = Product.objects.get(id=product_id)
+    except Product.DoesNotExist:
+        return Response({'error': 'Product not found'}, status=status.HTTP_404_NOT_FOUND)
+ 
+    item, created = Wishlist.objects.get_or_create(user=request.user, product=product)
+    if not created:
+        return Response({'message': 'Product already in wishlist'}, status=status.HTTP_200_OK)
+ 
+    serializer = WishlistSerializer(item, context={'request': request})
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
+ 
+ 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def remove_from_wishlist(request):
+    product_id = request.data.get('product_id')
+    Wishlist.objects.filter(user=request.user, product_id=product_id).delete()
+    return Response({'message': 'Removed from wishlist'})
+ 
+ 
+@api_view(['GET', 'PUT'])
+@permission_classes([IsAuthenticated])
+def profile_view(request):
+    profile, created = UserProfile.objects.get_or_create(user=request.user)
+ 
+    if request.method == 'GET':
+        serializer = ProfileSerializer(profile)
+        return Response(serializer.data)
+ 
+    serializer = ProfileSerializer(profile, data=request.data, partial=True)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

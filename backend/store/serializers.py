@@ -70,3 +70,28 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = ['id', 'name', 'address', 'phone', 'payment_method', 'total_amount', 'created_at', 'items']
+
+class WishlistSerializer(serializers.ModelSerializer):
+    product = ProductSerializer(read_only=True)
+    product_id = serializers.PrimaryKeyRelatedField(
+        queryset=Product.objects.all(), source='product', write_only=True
+    )
+ 
+    class Meta:
+        model = Wishlist
+        fields = ['id', 'product', 'product_id', 'added_at']
+ 
+class ProfileSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(source='user.email')
+    username = serializers.CharField(source='user.username', read_only=True)
+ 
+    class Meta:
+        model = UserProfile
+        fields = ['username', 'email', 'phone', 'address']
+ 
+    def update(self, instance, validated_data):
+        user_data = validated_data.pop('user', {})
+        if 'email' in user_data:
+            instance.user.email = user_data['email']
+            instance.user.save()
+        return super().update(instance, validated_data)

@@ -62,5 +62,12 @@ urlpatterns = [
         views.create_order
     ),
     path('orders/', views.get_orders),
+    #wishlist
+    path('wishlist/', views.get_wishlist),
+    path('wishlist/add/', views.add_to_wishlist),
+    path('wishlist/remove/', views.remove_from_wishlist),
+ 
+    # Profile
+    path('profile/', views.profile_view),
     
 ]
