@@ -1,7 +1,7 @@
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useCart } from '../context/CartContext';
-import { useWishlist } from '../context/WishlistContext';
+import { useWishList } from '../context/WishListContext';
 import ProductCardSkeleton from '../components/ProductCardSkeleton';
 
 function ProductDetails() {
@@ -165,7 +165,7 @@ function ProductDetails() {
                                     {isInWishlist(product.id) ? "❤️" : "🤍"}
                                 </button>
                             </div>
-                            
+
                             {/* Back */}
                             <Link
                                 to="/products"

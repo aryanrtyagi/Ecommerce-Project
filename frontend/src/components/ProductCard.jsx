@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
-import { useWishlist } from "../context/WishlistContext";
+import { useWishlist } from "../context/WishListContext";
 
 function ProductCard({ product }) {
   const { addToCart } = useCart();
-  const {isInWishlist, toggleWishlist } = useWishlist();
+  const {isInWishlist, toggleWishlist } = useWishList();
   const inInWishlist = isInWishlist(product.id);
 
   return (
@@ -21,7 +21,7 @@ function ProductCard({ product }) {
       >
         {inWishlist ? "❤️" : "🤍"}
       </button>
-      
+
       {/* Clickable Product Area */}
       <Link to={`/product/${product.id}`}>
         <img

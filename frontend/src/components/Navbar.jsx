@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import { useCart } from "../context/CartContext";
-import { useWishlist } from "../context/WishlistContext";
+import { useWishlist } from "../context/WishListContext";
 import { clearTokens, getAccessToken } from "../utils/auth";
 import toast from "react-hot-toast";
 

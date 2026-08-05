@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useWishlist } from "../context/WishlistContext";
 import { useCart } from "../context/CartContext";
 
-function Wishlist() {
+function WishList() {
     const { wishlistItems, removeFromWishlist } = useWishlist();
     const { addToCart } = useCart();
 

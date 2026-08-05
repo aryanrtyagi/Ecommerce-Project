@@ -14,7 +14,7 @@ import Footer from './components/Footer';
 import Landing from './pages/Landing';
 import SellerPage from './pages/SellerPage';
 import OrderHistory from './pages/OrderHistory';
-import Wishlist from './pages/Wishlist';
+import WishList from './pages/WishList';
 import Profile from './pages/Profile';
 
 // Hide Navbar/Footer on landing and seller pages
@@ -46,7 +46,7 @@ function App() {
           <Route element={<PrivateRouter />}>
             <Route path='/checkout' element={<CheckoutPage />} />
             <Route path='/orders' element={<OrderHistory />} />
-            <Route path='/wishlist' element={<Wishlist />} />
+            <Route path='/wishList' element={<Wishlist />} />
             <Route path='/profile' element={<Profile />} />
           </Route>
           <Route path="/login" element={<Login />} />
