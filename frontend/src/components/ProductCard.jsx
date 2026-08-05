@@ -1,12 +1,27 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { useWishlist } from "../context/WishlistContext";
 
 function ProductCard({ product }) {
   const { addToCart } = useCart();
+  const {isInWishlist, toggleWishlist } = useWishlist();
+  const inInWishlist = isInWishlist(product.id);
 
   return (
     <div className="bg-white rounded-2xl shadow-md p-4 transform transition duration-300 hover:scale-105 hover:shadow-2xl">
-
+       
+      {/* Wishlist toggle */}
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          toggleWishlist(product.id);
+        }}
+        className="absolute top-6 right-6 z-10 w-9 h-9 rounded-full bg-white shadow-md flex items-center justify-center text-lg"
+        aria-label="Toggle wishlist"
+      >
+        {inWishlist ? "❤️" : "🤍"}
+      </button>
+      
       {/* Clickable Product Area */}
       <Link to={`/product/${product.id}`}>
         <img

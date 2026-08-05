@@ -1,21 +1,37 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useCart } from "../context/CartContext";
+import { useWishlist } from "../context/WishlistContext";
 import { clearTokens, getAccessToken } from "../utils/auth";
 import toast from "react-hot-toast";
 
 function Navbar() {
     const { cartItems } = useCart();
+    const { wishlistItems } = useWishlist();
     const navigate = useNavigate();
     const [search, setSearch] = useState("");
     const [menuOpen, setMenuOpen] = useState(false);
+    const [accountOpen, setAccountOpen] = useState(false);
+    const accountRef = useRef(null);
 
     const cartCount = (cartItems || []).reduce(
         (total, item) => total + item.quantity,
         0
     );
 
+    const wishlistCount = (wishlistItems || []).length;
+
     const isLoggedIn = !!getAccessToken();
+
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (accountRef.current && !accountRef.current.contains(e.target)) {
+                setAccountOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -33,6 +49,7 @@ function Navbar() {
         clearTokens();
         toast.success("Logged out Successfully !!");
         setMenuOpen(false);
+        setAccountOpen(false);
         navigate("/login");
         window.location.reload();
     };
@@ -113,12 +130,70 @@ function Navbar() {
                             </Link>
                         </>
                     ) : (
-                        <button
-                            onClick={handleLogout}
-                            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
-                        >
-                            Logout
-                        </button>
+                        <div className="relative" ref={accountRef}>
+                            <button
+                                onClick={() => setAccountOpen((v) => !v)}
+                                className="flex items-center gap-2 text-gray-700 hover:text-indigo-600 font-medium"
+                            >
+                                <span className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-semibold">
+                                    👤
+                                </span>
+                                Account
+                                <svg xmlns="http://www.w3.org/2000/svg" className={`w-4 h-4 transition-transform ${accountOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+
+                            {accountOpen && (
+                                <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-50">
+                                    <Link
+                                        to="/profile"
+                                        onClick={() => setAccountOpen(false)}
+                                        className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                                    >
+                                        👤 My Profile
+                                    </Link>
+                                    <Link
+                                        to="/orders"
+                                        onClick={() => setAccountOpen(false)}
+                                        className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                                    >
+                                        📦 Order History
+                                    </Link>
+                                    <Link
+                                        to="/wishlist"
+                                        onClick={() => setAccountOpen(false)}
+                                        className="flex items-center justify-between px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                                    >
+                                        <span>❤️ Wishlist</span>
+                                        {wishlistCount > 0 && (
+                                            <span className="bg-red-500 text-white text-xs font-bold rounded-full px-2 py-0.5">
+                                                {wishlistCount}
+                                            </span>
+                                        )}
+                                    </Link>
+                                    <Link
+                                        to="/cart"
+                                        onClick={() => setAccountOpen(false)}
+                                        className="flex items-center justify-between px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                                    >
+                                        <span>🛒 My Cart</span>
+                                        {cartCount > 0 && (
+                                            <span className="bg-red-500 text-white text-xs font-bold rounded-full px-2 py-0.5">
+                                                {cartCount}
+                                            </span>
+                                        )}
+                                    </Link>
+                                    <div className="border-t border-gray-100 my-1" />
+                                    <button
+                                        onClick={handleLogout}
+                                        className="w-full text-left flex items-center gap-2 px-4 py-2 text-red-500 hover:bg-red-50"
+                                    >
+                                        🚪 Logout
+                                    </button>
+                                </div>
+                            )}
+                        </div>
                     )}
                 </div>
 
@@ -226,12 +301,35 @@ function Navbar() {
                             </Link>
                         </>
                     ) : (
-                        <button
-                            onClick={handleLogout}
-                            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition w-full"
-                        >
-                            Logout
-                        </button>
+                        <>
+                            <Link
+                                to="/profile"
+                                onClick={() => setMenuOpen(false)}
+                                className="text-gray-700 hover:text-indigo-600 font-medium py-2 border-b border-gray-100"
+                            >
+                                👤 My Profile
+                            </Link>
+                            <Link
+                                to="/orders"
+                                onClick={() => setMenuOpen(false)}
+                                className="text-gray-700 hover:text-indigo-600 font-medium py-2 border-b border-gray-100"
+                            >
+                                📦 Order History
+                            </Link>
+                            <Link
+                                to="/wishlist"
+                                onClick={() => setMenuOpen(false)}
+                                className="text-gray-700 hover:text-indigo-600 font-medium py-2 border-b border-gray-100"
+                            >
+                                ❤️ Wishlist {wishlistCount > 0 && <span className="ml-2 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-0.5">{wishlistCount}</span>}
+                            </Link>
+                            <button
+                                onClick={handleLogout}
+                                className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition w-full"
+                            >
+                                🚪 Logout
+                            </button>
+                        </>
                     )}
                 </div>
             )}

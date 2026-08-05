@@ -1,6 +1,7 @@
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useCart } from '../context/CartContext';
+import { useWishlist } from '../context/WishlistContext';
 import ProductCardSkeleton from '../components/ProductCardSkeleton';
 
 function ProductDetails() {
@@ -15,6 +16,7 @@ function ProductDetails() {
     const [adding, setAdding] = useState(false);
 
     const { addToCart } = useCart();
+    const { isInWishlist, toggleWishlist } = useWishlist();
 
     useEffect(() => {
         setLoading(true);
@@ -43,6 +45,14 @@ function ProductDetails() {
             await addToCart(product.id);
         }
         setAdding(false);
+    };
+
+    const handleToggleWishlist = () => {
+        if (!localStorage.getItem('access_token')) {
+            navigate('/login');
+            return;
+        }
+        toggleWishlist(product.id);
     };
 
     if (loading) return (
@@ -138,15 +148,24 @@ function ProductDetails() {
                                 </div>
                             </div>
 
-                            {/* Add to Cart */}
-                            <button
-                                onClick={handleAddToCart}
-                                disabled={adding}
-                                className="w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold text-lg hover:bg-indigo-700 transition disabled:opacity-60 disabled:cursor-not-allowed"
-                            >
-                                {adding ? "Adding..." : "🛒 Add to Cart"}
-                            </button>
-
+                            {/* Add to Cart + Wishlist */}
+                            <div className="flex gap-3">
+                                <button
+                                    onClick={handleAddToCart}
+                                    disabled={adding}
+                                    className="flex-1 bg-indigo-600 text-white py-3 rounded-xl font-semibold text-lg hover:bg-indigo-700 transition disabled:opacity-60 disabled:cursor-not-allowed"
+                                >
+                                    {adding ? "Adding..." : "🛒 Add to Cart"}
+                                </button>
+                                <button
+                                    onClick={handleToggleWishlist}
+                                    className="w-14 h-14 flex items-center justify-center rounded-xl border border-gray-300 text-2xl hover:bg-gray-50 transition"
+                                    aria-label="Toggle wishlist"
+                                >
+                                    {isInWishlist(product.id) ? "❤️" : "🤍"}
+                                </button>
+                            </div>
+                            
                             {/* Back */}
                             <Link
                                 to="/products"

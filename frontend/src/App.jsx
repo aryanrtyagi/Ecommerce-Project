@@ -13,6 +13,9 @@ import ProductsPage from './pages/ProductPage';
 import Footer from './components/Footer';
 import Landing from './pages/Landing';
 import SellerPage from './pages/SellerPage';
+import OrderHistory from './pages/OrderHistory';
+import Wishlist from './pages/Wishlist';
+import Profile from './pages/Profile';
 
 // Hide Navbar/Footer on landing and seller pages
 function Layout({ children }) {
@@ -42,6 +45,9 @@ function App() {
           <Route path="/cart" element={<CartPage />} />
           <Route element={<PrivateRouter />}>
             <Route path='/checkout' element={<CheckoutPage />} />
+            <Route path='/orders' element={<OrderHistory />} />
+            <Route path='/wishlist' element={<Wishlist />} />
+            <Route path='/profile' element={<Profile />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
