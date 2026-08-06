@@ -32,7 +32,7 @@ function HeroSection() {
     return (
         <section className="relative min-h-screen bg-black text-white overflow-hidden flex items-center">
 
-            <div className="absolute inset-0 opacity-[0.07] bg-[linear-gradient(rgba(255,255,255,0.5)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.5)_1px,transparent_1px)] bg-[size:64px_64px]"></div>
+            <div className="absolute inset-0 opacity-[0.07] bg-[linear-gradient(rgba(255,255,255,0.5)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.5)_1px,transparent_1px)] bg-size:64px_64px"></div>
 
             <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 py-20 grid lg:grid-cols-2 gap-16 items-center">
 
