@@ -102,19 +102,19 @@ function ProductsPage() {
         selectedCategory !== "all";
 
     return (
-        <div className="min-h-screen bg-gray-100 px-6 py-12">
+        <div className="min-h-screen bg-white px-6 py-12">
             {/* Heading */}
             <div className="text-center mb-8">
-                <h1 className="text-4xl font-bold text-gray-800">Products</h1>
+                <h1 className="font-display text-4xl font-semibold text-black">Products</h1>
                 {query && (
                     <div className="flex items-center justify-center gap-4 mt-3">
-                        <p className="text-gray-600">
+                        <p className="text-neutral-600">
                             Search results for:
-                            <span className="font-semibold"> "{query}"</span>
+                            <span className="font-semibold text-black"> "{query}"</span>
                         </p>
                         <button
                             onClick={() => (window.location.href = "/")}
-                            className="bg-gray-200 px-3 py-1 rounded-lg hover:bg-gray-300 transition text-sm"
+                            className="border border-neutral-300 px-3 py-1 hover:border-black transition text-sm"
                         >
                             Clear Search
                         </button>
@@ -130,7 +130,7 @@ function ProductsPage() {
                         <div className="flex items-center gap-3">
                             <button
                                 onClick={() => setShowFilters((v) => !v)}
-                                className="flex items-center gap-2 bg-white border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50 transition text-sm font-medium"
+                                className="flex items-center gap-2 bg-white border border-neutral-300 px-4 py-2 hover:border-black transition text-sm font-medium"
                             >
                                 <svg
                                     className="w-4 h-4"
@@ -147,7 +147,7 @@ function ProductsPage() {
                                 </svg>
                                 Filters
                                 {hasActiveFilters && (
-                                    <span className="bg-blue-600 text-white text-xs rounded-full px-2 py-0.5">
+                                    <span className="bg-black text-white text-xs px-2 py-0.5">
                                         Active
                                     </span>
                                 )}
@@ -155,7 +155,7 @@ function ProductsPage() {
                             {hasActiveFilters && (
                                 <button
                                     onClick={clearFilters}
-                                    className="text-sm text-red-500 hover:text-red-700 transition"
+                                    className="text-sm text-neutral-500 hover:text-black underline underline-offset-2 transition"
                                 >
                                     Clear all
                                 </button>
@@ -164,14 +164,14 @@ function ProductsPage() {
 
                         {/* Right: result count + sort */}
                         <div className="flex items-center gap-3">
-                            <span className="text-sm text-gray-500">
+                            <span className="text-sm text-neutral-500">
                                 {filteredProducts.length} result
                                 {filteredProducts.length !== 1 ? "s" : ""}
                             </span>
                             <select
                                 value={sortBy}
                                 onChange={(e) => setSortBy(e.target.value)}
-                                className="bg-white border border-gray-300 text-sm rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className="bg-white border border-neutral-300 text-sm px-3 py-2 focus:outline-none focus:border-black"
                             >
                                 <option value="default">Sort: Default</option>
                                 <option value="price_asc">Price: Low to High</option>
@@ -184,17 +184,17 @@ function ProductsPage() {
 
                     {/* Expandable filter panel */}
                     {showFilters && (
-                        <div className="mt-4 bg-white border border-gray-200 rounded-xl p-5 flex flex-wrap gap-6 shadow-sm">
+                        <div className="mt-4 bg-white border border-neutral-200 p-5 flex flex-wrap gap-6">
                             {/* Category — only shown if products have categories */}
                             {categories.length > 0 && (
                                 <div className="flex flex-col gap-1.5 min-w-160px">
-                                    <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                                    <label className="text-xs font-semibold text-neutral-500 uppercase tracking-wide">
                                         Category
                                     </label>
                                     <select
                                         value={selectedCategory}
                                         onChange={(e) => setSelectedCategory(e.target.value)}
-                                        className="border border-gray-300 text-sm rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="border border-neutral-300 text-sm px-3 py-2 focus:outline-none focus:border-black"
                                     >
                                         <option value="all">All Categories</option>
                                         {categories.map((cat) => (
@@ -208,7 +208,7 @@ function ProductsPage() {
 
                             {/* Price Range */}
                             <div className="flex flex-col gap-1.5">
-                                <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                                <label className="text-xs font-semibold text-neutral-500 uppercase tracking-wide">
                                     Price Range
                                 </label>
                                 <div className="flex items-center gap-2">
@@ -222,10 +222,10 @@ function ProductsPage() {
                                                 min: e.target.value,
                                             }))
                                         }
-                                        className="border border-gray-300 text-sm rounded-lg px-3 py-2 w-24 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="border border-neutral-300 text-sm px-3 py-2 w-24 focus:outline-none focus:border-black"
                                         min="0"
                                     />
-                                    <span className="text-gray-400">—</span>
+                                    <span className="text-neutral-400">—</span>
                                     <input
                                         type="number"
                                         placeholder="Max"
@@ -236,7 +236,7 @@ function ProductsPage() {
                                                 max: e.target.value,
                                             }))
                                         }
-                                        className="border border-gray-300 text-sm rounded-lg px-3 py-2 w-24 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="border border-neutral-300 text-sm px-3 py-2 w-24 focus:outline-none focus:border-black"
                                         min="0"
                                     />
                                 </div>
@@ -254,7 +254,7 @@ function ProductsPage() {
                     ))}
                 </div>
             ) : error ? (
-                <div className="text-center text-red-500 font-semibold">{error}</div>
+                <div className="text-center text-black font-semibold">{error}</div>
             ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {filteredProducts.length > 0 ? (
@@ -262,7 +262,7 @@ function ProductsPage() {
                             <ProductCard key={product.id} product={product} />
                         ))
                     ) : (
-                        <p className="col-span-full text-center text-gray-500">
+                        <p className="col-span-full text-center text-neutral-500">
                             No products match your filters.
                         </p>
                     )}

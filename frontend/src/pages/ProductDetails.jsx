@@ -1,7 +1,7 @@
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useCart } from '../context/CartContext';
-import { useWishList } from '../context/WishListContext';
+import { useWishlist } from '../context/WishlistContext';
 import ProductCardSkeleton from '../components/ProductCardSkeleton';
 
 function ProductDetails() {
@@ -56,7 +56,7 @@ function ProductDetails() {
     };
 
     if (loading) return (
-        <div className="min-h-screen bg-gray-100 p-6">
+        <div className="min-h-screen bg-white p-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
                 {Array.from({ length: 4 }).map((_, i) => (
                     <ProductCardSkeleton key={i} />
@@ -68,8 +68,8 @@ function ProductDetails() {
     if (error) return (
         <div className="min-h-screen flex items-center justify-center">
             <div className="text-center">
-                <p className="text-red-500 font-semibold text-lg mb-4">Error: {error}</p>
-                <Link to="/" className="text-indigo-600 hover:underline">← Back to Home</Link>
+                <p className="text-black font-semibold text-lg mb-4">Error: {error}</p>
+                <Link to="/" className="text-black underline underline-offset-2">← Back to Home</Link>
             </div>
         </div>
     );
@@ -77,23 +77,23 @@ function ProductDetails() {
     if (!product) return (
         <div className="min-h-screen flex items-center justify-center">
             <div className="text-center">
-                <p className="text-gray-600 text-lg mb-4">No product found.</p>
-                <Link to="/" className="text-indigo-600 hover:underline">← Back to Home</Link>
+                <p className="text-neutral-600 text-lg mb-4">No product found.</p>
+                <Link to="/" className="text-black underline underline-offset-2">← Back to Home</Link>
             </div>
         </div>
     );
 
     return (
-        <div className="min-h-screen bg-gray-100 p-6 flex items-center justify-center">
-            <div className="bg-white rounded-2xl shadow-lg max-w-5xl w-full p-6">
+        <div className="min-h-screen bg-white p-6 flex items-center justify-center">
+            <div className="bg-white border border-neutral-200 max-w-5xl w-full p-6">
                 <div className="grid md:grid-cols-2 gap-8">
 
                     {/* Image */}
-                    <div className="flex items-center justify-center bg-gray-50 rounded-xl p-4">
+                    <div className="flex items-center justify-center bg-neutral-50 p-4">
                         <img
                             src={product.image || "https://via.placeholder.com/400"}
                             alt={product.name}
-                            className="w-full h-400px object-cover rounded-xl"
+                            className="w-full h-400px object-cover"
                         />
                     </div>
 
@@ -103,23 +103,23 @@ function ProductDetails() {
 
                             {/* Category badge */}
                             {product.category && (
-                                <span className="inline-block bg-indigo-100 text-indigo-600 text-xs font-semibold px-3 py-1 rounded-full mb-3">
+                                <span className="inline-block border border-neutral-300 text-neutral-600 text-xs font-semibold uppercase tracking-wide px-3 py-1 mb-3">
                                     {product.category.name}
                                 </span>
                             )}
 
                             {/* Name */}
-                            <h1 className="text-3xl font-bold text-gray-800 mb-3">
+                            <h1 className="font-display text-3xl font-semibold text-black mb-3">
                                 {product.name}
                             </h1>
 
                             {/* Price */}
-                            <p className="text-3xl font-bold text-indigo-600 mb-4">
+                            <p className="font-mono-price text-2xl font-semibold text-black mb-4">
                                 ₹{product.price}
                             </p>
 
                             {/* Description */}
-                            <p className="text-gray-600 leading-relaxed">
+                            <p className="text-neutral-600 leading-relaxed">
                                 {product.description}
                             </p>
                         </div>
@@ -128,20 +128,20 @@ function ProductDetails() {
 
                             {/* Quantity Selector */}
                             <div>
-                                <p className="text-sm font-semibold text-gray-700 mb-2">Quantity</p>
+                                <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wide mb-2">Quantity</p>
                                 <div className="flex items-center gap-3">
                                     <button
                                         onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                                        className="w-9 h-9 rounded-lg border border-gray-300 text-lg font-bold hover:bg-gray-100 transition flex items-center justify-center"
+                                        className="w-9 h-9 border border-neutral-300 hover:border-black text-lg font-medium transition flex items-center justify-center"
                                     >
                                         −
                                     </button>
-                                    <span className="text-lg font-semibold w-6 text-center">
+                                    <span className="text-lg font-medium w-6 text-center">
                                         {quantity}
                                     </span>
                                     <button
                                         onClick={() => setQuantity((q) => q + 1)}
-                                        className="w-9 h-9 rounded-lg border border-gray-300 text-lg font-bold hover:bg-gray-100 transition flex items-center justify-center"
+                                        className="w-9 h-9 border border-neutral-300 hover:border-black text-lg font-medium transition flex items-center justify-center"
                                     >
                                         +
                                     </button>
@@ -153,23 +153,23 @@ function ProductDetails() {
                                 <button
                                     onClick={handleAddToCart}
                                     disabled={adding}
-                                    className="flex-1 bg-indigo-600 text-white py-3 rounded-xl font-semibold text-lg hover:bg-indigo-700 transition disabled:opacity-60 disabled:cursor-not-allowed"
+                                    className="flex-1 bg-black text-white py-3 text-sm font-medium hover:bg-neutral-800 transition disabled:opacity-60 disabled:cursor-not-allowed"
                                 >
-                                    {adding ? "Adding..." : "🛒 Add to Cart"}
+                                    {adding ? "Adding..." : "Add to Cart"}
                                 </button>
                                 <button
                                     onClick={handleToggleWishlist}
-                                    className="w-14 h-14 flex items-center justify-center rounded-xl border border-gray-300 text-2xl hover:bg-gray-50 transition"
+                                    className="w-14 h-14 flex items-center justify-center border border-neutral-300 hover:border-black text-xl transition"
                                     aria-label="Toggle wishlist"
                                 >
-                                    {isInWishlist(product.id) ? "❤️" : "🤍"}
+                                    {isInWishlist(product.id) ? "●" : "○"}
                                 </button>
                             </div>
 
                             {/* Back */}
                             <Link
                                 to="/products"
-                                className="text-center text-sm text-gray-500 hover:text-indigo-600 transition"
+                                className="text-center text-sm text-neutral-500 hover:text-black transition"
                             >
                                 ← Back to Products
                             </Link>

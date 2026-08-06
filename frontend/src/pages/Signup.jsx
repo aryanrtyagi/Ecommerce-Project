@@ -32,17 +32,17 @@ function Signup() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6">
-      <div className="max-w-md w-full bg-white p-6 rounded shadow">
-        <h2 className="text-2xl font-bold mb-4">Signup</h2>
+    <div className="min-h-screen flex items-center justify-center p-6 bg-white">
+      <div className="max-w-md w-full border border-neutral-200 p-8">
+        <h2 className="font-display text-2xl font-semibold text-black mb-6">Sign Up</h2>
         <form onSubmit={handleSubmit} className="space-y-3">
-          <input name="username" onChange={handleChange} value={form.username} placeholder="Username" required className="w-full p-2 border rounded"/>
-          <input name="email" type="email" onChange={handleChange} value={form.email} placeholder="Email" className="w-full p-2 border rounded"/>
-          <input name="password" type="password" onChange={handleChange} value={form.password} placeholder="Password" required className="w-full p-2 border rounded"/>
-          <input name="password2" type="password" onChange={handleChange} value={form.password2} placeholder="Confirm Password" required className="w-full p-2 border rounded"/>
-          <button className="w-full bg-blue-600 text-white py-2 rounded">Create Account</button>
+          <input name="username" onChange={handleChange} value={form.username} placeholder="Username" required className="w-full p-3 border border-neutral-300 focus:border-black outline-none text-sm transition-colors"/>
+          <input name="email" type="email" onChange={handleChange} value={form.email} placeholder="Email" className="w-full p-3 border border-neutral-300 focus:border-black outline-none text-sm transition-colors"/>
+          <input name="password" type="password" onChange={handleChange} value={form.password} placeholder="Password" required className="w-full p-3 border border-neutral-300 focus:border-black outline-none text-sm transition-colors"/>
+          <input name="password2" type="password" onChange={handleChange} value={form.password2} placeholder="Confirm Password" required className="w-full p-3 border border-neutral-300 focus:border-black outline-none text-sm transition-colors"/>
+          <button className="w-full bg-black text-white py-3 text-sm font-medium hover:bg-neutral-800 transition">Create Account</button>
         </form>
-        {msg && <p className="mt-3 text-sm">{msg}</p>}
+        {msg && <p className="mt-4 text-sm text-neutral-600">{msg}</p>}
       </div>
     </div>
   );

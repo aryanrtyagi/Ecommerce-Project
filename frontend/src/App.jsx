@@ -14,7 +14,7 @@ import Footer from './components/Footer';
 import Landing from './pages/Landing';
 import SellerPage from './pages/SellerPage';
 import OrderHistory from './pages/OrderHistory';
-import WishList from './pages/WishList';
+import Wishlist from './pages/Wishlist';
 import Profile from './pages/Profile';
 
 // Hide Navbar/Footer on landing and seller pages
@@ -35,7 +35,20 @@ function Layout({ children }) {
 function App() {
   return (
     <Router>
-      <Toaster position='top-center' />
+      <Toaster
+        position='top-center'
+        toastOptions={{
+          style: {
+            background: '#111111',
+            color: '#ffffff',
+            borderRadius: '2px',
+            fontFamily: 'Inter, sans-serif',
+            fontSize: '14px',
+          },
+          success: { iconTheme: { primary: '#ffffff', secondary: '#111111' } },
+          error: { iconTheme: { primary: '#ffffff', secondary: '#111111' } },
+        }}
+      />
       <Layout>
         <Routes>
           <Route path="/" element={<Landing />} />
@@ -46,7 +59,7 @@ function App() {
           <Route element={<PrivateRouter />}>
             <Route path='/checkout' element={<CheckoutPage />} />
             <Route path='/orders' element={<OrderHistory />} />
-            <Route path='/wishList' element={<Wishlist />} />
+            <Route path='/wishlist' element={<Wishlist />} />
             <Route path='/profile' element={<Profile />} />
           </Route>
           <Route path="/login" element={<Login />} />

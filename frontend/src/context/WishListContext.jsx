@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 import { authFetch } from "../utils/auth";
 import toast from "react-hot-toast";
 
-const WishListContext = createContext();
+const WishlistContext = createContext();
 
 export const WishlistProvider = ({ children }) => {
     const BASEURL = import.meta.env.VITE_DJANGO_BASE_URL;

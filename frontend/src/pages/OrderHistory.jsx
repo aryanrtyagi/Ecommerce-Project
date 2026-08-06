@@ -27,7 +27,7 @@ function OrderHistory() {
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center">
-                <p className="text-gray-500">Loading your orders...</p>
+                <p className="text-neutral-500">Loading your orders...</p>
             </div>
         );
     }
@@ -35,31 +35,31 @@ function OrderHistory() {
     if (error) {
         return (
             <div className="min-h-screen flex items-center justify-center">
-                <p className="text-red-500">Error: {error}</p>
+                <p className="text-black">Error: {error}</p>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-gray-100 p-6">
+        <div className="min-h-screen bg-white pt-24 p-6">
             <div className="max-w-4xl mx-auto">
-                <h1 className="text-2xl font-bold text-gray-800 mb-6">📦 Order History</h1>
+                <h1 className="font-display text-2xl font-semibold text-black mb-6">Order History</h1>
 
                 {orders.length === 0 ? (
-                    <div className="bg-white rounded-2xl shadow-md p-10 text-center">
-                        <p className="text-gray-600 mb-4">You haven't placed any orders yet.</p>
-                        <Link to="/products" className="text-indigo-600 hover:underline font-medium">
+                    <div className="bg-white border border-neutral-200 p-10 text-center">
+                        <p className="text-neutral-600 mb-4">You haven't placed any orders yet.</p>
+                        <Link to="/products" className="text-black underline underline-offset-2 font-medium">
                             Start Shopping →
                         </Link>
                     </div>
                 ) : (
                     <div className="flex flex-col gap-5">
                         {orders.map((order) => (
-                            <div key={order.id} className="bg-white rounded-2xl shadow-md p-6">
-                                <div className="flex flex-wrap items-center justify-between gap-2 mb-4 pb-4 border-b border-gray-100">
+                            <div key={order.id} className="bg-white border border-neutral-200 p-6">
+                                <div className="flex flex-wrap items-center justify-between gap-2 mb-4 pb-4 border-b border-neutral-100">
                                     <div>
-                                        <p className="font-semibold text-gray-800">Order #{order.id}</p>
-                                        <p className="text-sm text-gray-500">
+                                        <p className="font-semibold text-black">Order #{order.id}</p>
+                                        <p className="text-sm text-neutral-500">
                                             {new Date(order.created_at).toLocaleDateString(undefined, {
                                                 year: "numeric",
                                                 month: "long",
@@ -67,7 +67,7 @@ function OrderHistory() {
                                             })}
                                         </p>
                                     </div>
-                                    <span className="bg-indigo-100 text-indigo-600 text-xs font-semibold px-3 py-1 rounded-full">
+                                    <span className="border border-neutral-300 text-neutral-600 text-xs font-semibold uppercase tracking-wide px-3 py-1">
                                         {order.payment_method}
                                     </span>
                                 </div>
@@ -78,11 +78,11 @@ function OrderHistory() {
                                             <img
                                                 src={item.product_image}
                                                 alt={item.product_name}
-                                                className="w-14 h-14 object-cover rounded-lg"
+                                                className="w-14 h-14 object-cover border border-neutral-200"
                                             />
                                             <div className="flex-1">
-                                                <p className="text-gray-800 font-medium">{item.product_name}</p>
-                                                <p className="text-sm text-gray-500">
+                                                <p className="text-black font-medium text-sm">{item.product_name}</p>
+                                                <p className="text-sm text-neutral-500">
                                                     Qty: {item.quantity} × ₹{item.price}
                                                 </p>
                                             </div>
@@ -90,11 +90,11 @@ function OrderHistory() {
                                     ))}
                                 </div>
 
-                                <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
-                                    <p className="text-sm text-gray-500">
+                                <div className="flex items-center justify-between mt-4 pt-4 border-t border-neutral-100">
+                                    <p className="text-sm text-neutral-500">
                                         Shipped to: {order.address}
                                     </p>
-                                    <p className="text-lg font-bold text-indigo-600">
+                                    <p className="font-mono-price text-lg font-semibold text-black">
                                         ₹{order.total_amount}
                                     </p>
                                 </div>

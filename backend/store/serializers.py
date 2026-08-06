@@ -84,7 +84,8 @@ class WishlistSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(source='user.email')
     username = serializers.CharField(source='user.username', read_only=True)
- 
+    profile_picture = serializers.ImageField(required=False, allow_null=True)
+    
     class Meta:
         model = UserProfile
         fields = ['username', 'email', 'phone', 'address']

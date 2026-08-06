@@ -1,1 +1,33 @@
 @import 'tailwindcss';
+
+:root {
+  --ink: #111111;
+  --ink-soft: #46453f;
+  --paper: #ffffff;
+  --paper-soft: #f4f3f0;
+  --line: #dfded8;
+  --mute: #8c8a80;
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .font-display {
+  font-family: 'Fraunces', serif;
+  font-optical-sizing: auto;
+  letter-spacing: -0.01em;
+}
+
+.font-mono-price, .price {
+  font-family: 'IBM Plex Mono', monospace;
+  font-feature-settings: 'tnum';
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--paper);
+}

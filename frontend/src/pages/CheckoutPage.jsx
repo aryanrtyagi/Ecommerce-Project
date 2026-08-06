@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 function CheckoutPage() {
     const BASEURL = import.meta.env.VITE_DJANGO_BASE_URL;
     const navigate = useNavigate();
-    const { cartItems, total, clearCart, fetchCart } = useCart();
+    const { cartItems, total, fetchCart } = useCart();
 
     const [form, setForm] = useState({
         name: "",
@@ -37,41 +37,34 @@ function CheckoutPage() {
 
             if (res.ok) {
                 await fetchCart();
-                toast.success("Order placed successfully! 🎉");
+                toast.success("Order placed successfully");
                 setTimeout(() => navigate("/"), 1500);
             } else {
                 toast.error(data.error || "Order failed. Try again.");
             }
         } catch (error) {
             console.error("Checkout error:", error);
-            toast.error("Something went wrong!");
+            toast.error("Something went wrong");
         } finally {
             setLoading(false);
         }
     };
 
-    const paymentIcons = {
-        COD: "💵",
-        ONLINE: "🌐",
-        PAYPAL: "🅿️",
-        CARD: "💳",
-    };
-
     return (
-        <div className="min-h-screen bg-gray-100 pt-24 pb-12 px-4">
+        <div className="min-h-screen bg-white pt-24 pb-12 px-4">
             <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
 
                 {/* Left — Form */}
-                <div className="bg-white rounded-2xl shadow-md p-8">
-                    <h1 className="text-2xl font-bold text-gray-800 mb-6">
-                        🧾 Checkout
+                <div className="bg-white border border-neutral-200 p-8">
+                    <h1 className="font-display text-2xl font-semibold text-black mb-6">
+                        Checkout
                     </h1>
 
                     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
 
                         {/* Name */}
                         <div className="flex flex-col gap-1.5">
-                            <label className="text-sm font-semibold text-gray-600">
+                            <label className="text-xs font-semibold text-neutral-500 uppercase tracking-wide">
                                 Full Name
                             </label>
                             <input
@@ -81,13 +74,13 @@ function CheckoutPage() {
                                 onChange={handleChange}
                                 placeholder="Name"
                                 required
-                                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700"
+                                className="w-full px-4 py-3 border border-neutral-300 focus:border-black outline-none text-black transition-colors"
                             />
                         </div>
 
                         {/* Address */}
                         <div className="flex flex-col gap-1.5">
-                            <label className="text-sm font-semibold text-gray-600">
+                            <label className="text-xs font-semibold text-neutral-500 uppercase tracking-wide">
                                 Delivery Address
                             </label>
                             <textarea
@@ -97,13 +90,13 @@ function CheckoutPage() {
                                 placeholder="House No, Street, City, State, Pincode"
                                 required
                                 rows={3}
-                                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700 resize-none"
+                                className="w-full px-4 py-3 border border-neutral-300 focus:border-black outline-none text-black resize-none transition-colors"
                             />
                         </div>
 
                         {/* Phone */}
                         <div className="flex flex-col gap-1.5">
-                            <label className="text-sm font-semibold text-gray-600">
+                            <label className="text-xs font-semibold text-neutral-500 uppercase tracking-wide">
                                 Phone Number
                             </label>
                             <input
@@ -111,30 +104,30 @@ function CheckoutPage() {
                                 name="phone"
                                 value={form.phone}
                                 onChange={handleChange}
-                                placeholder="Enter Contact No:"
+                                placeholder="Enter contact number"
                                 required
-                                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-700"
+                                className="w-full px-4 py-3 border border-neutral-300 focus:border-black outline-none text-black transition-colors"
                             />
                         </div>
 
                         {/* Payment Method */}
                         <div className="flex flex-col gap-2">
-                            <label className="text-sm font-semibold text-gray-600">
+                            <label className="text-xs font-semibold text-neutral-500 uppercase tracking-wide">
                                 Payment Method
                             </label>
                             <div className="grid grid-cols-2 gap-3">
                                 {[
-                                    { value: "COD", label: "Cash on Delivery", icon: "💵" },
-                                    { value: "ONLINE", label: "Online Payment", icon: "🌐" },
-                                    { value: "PAYPAL", label: "PayPal", icon: "🅿️" },
-                                    { value: "CARD", label: "Card", icon: "💳" },
+                                    { value: "COD", label: "Cash on Delivery" },
+                                    { value: "ONLINE", label: "Online Payment" },
+                                    { value: "PAYPAL", label: "PayPal" },
+                                    { value: "CARD", label: "Card" },
                                 ].map((method) => (
                                     <label
                                         key={method.value}
-                                        className={`flex items-center gap-2 border rounded-xl px-4 py-3 cursor-pointer transition ${
+                                        className={`flex items-center gap-2 border px-4 py-3 cursor-pointer transition ${
                                             form.payment_method === method.value
-                                                ? "border-indigo-500 bg-indigo-50 text-indigo-700 font-semibold"
-                                                : "border-gray-300 text-gray-600 hover:bg-gray-50"
+                                                ? "border-black bg-black text-white font-medium"
+                                                : "border-neutral-300 text-neutral-600 hover:border-black"
                                         }`}
                                     >
                                         <input
@@ -145,7 +138,6 @@ function CheckoutPage() {
                                             onChange={handleChange}
                                             className="hidden"
                                         />
-                                        <span>{method.icon}</span>
                                         <span className="text-sm">{method.label}</span>
                                     </label>
                                 ))}
@@ -156,16 +148,16 @@ function CheckoutPage() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold text-lg hover:bg-indigo-700 transition disabled:opacity-60 disabled:cursor-not-allowed mt-2"
+                            className="w-full bg-black text-white py-3 text-sm font-medium hover:bg-neutral-800 transition disabled:opacity-60 disabled:cursor-not-allowed mt-2"
                         >
-                            {loading ? "Placing Order..." : "Place Order 🎉"}
+                            {loading ? "Placing Order..." : "Place Order"}
                         </button>
                     </form>
                 </div>
 
                 {/* Right — Order Summary */}
-                <div className="bg-white rounded-2xl shadow-md p-8 h-fit">
-                    <h2 className="text-xl font-bold text-gray-800 mb-5">
+                <div className="bg-white border border-neutral-200 p-8 h-fit">
+                    <h2 className="font-display text-xl font-semibold text-black mb-5">
                         Order Summary
                     </h2>
 
@@ -176,17 +168,17 @@ function CheckoutPage() {
                                 <img
                                     src={item.product_image || "https://via.placeholder.com/60"}
                                     alt={item.product_name}
-                                    className="w-14 h-14 object-cover rounded-lg "
+                                    className="w-14 h-14 object-cover border border-neutral-200"
                                 />
                                 <div className="flex-1">
-                                    <p className="text-sm font-semibold text-gray-800 truncate">
+                                    <p className="text-sm font-medium text-black truncate">
                                         {item.product_name}
                                     </p>
-                                    <p className="text-xs text-gray-400">
+                                    <p className="text-xs text-neutral-400">
                                         Qty: {item.quantity}
                                     </p>
                                 </div>
-                                <p className="text-sm font-bold text-indigo-600">
+                                <p className="font-mono-price text-sm font-semibold text-black">
                                     ₹{(parseFloat(item.product_price) * item.quantity).toFixed(2)}
                                 </p>
                             </div>
@@ -194,22 +186,22 @@ function CheckoutPage() {
                     </div>
 
                     {/* Totals */}
-                    <div className="border-t border-gray-100 pt-4 flex flex-col gap-2 text-sm text-gray-600">
+                    <div className="border-t border-neutral-200 pt-4 flex flex-col gap-2 text-sm text-neutral-600">
                         <div className="flex justify-between">
                             <span>Subtotal</span>
-                            <span>₹{total.toFixed(2)}</span>
+                            <span className="font-mono-price">₹{total.toFixed(2)}</span>
                         </div>
                         <div className="flex justify-between">
                             <span>Shipping</span>
-                            <span className="text-green-500 font-medium">Free</span>
+                            <span className="font-medium">Free</span>
                         </div>
                         <div className="flex justify-between">
                             <span>Tax (18% GST)</span>
-                            <span>₹{(total * 0.18).toFixed(2)}</span>
+                            <span className="font-mono-price">₹{(total * 0.18).toFixed(2)}</span>
                         </div>
-                        <div className="flex justify-between items-center border-t border-gray-100 pt-3 mt-2">
-                            <span className="text-lg font-bold text-gray-800">Total</span>
-                            <span className="text-xl font-bold text-indigo-600">
+                        <div className="flex justify-between items-center border-t border-neutral-200 pt-3 mt-2">
+                            <span className="text-lg font-semibold text-black">Total</span>
+                            <span className="font-mono-price text-xl font-semibold text-black">
                                 ₹{(total * 1.18).toFixed(2)}
                             </span>
                         </div>
